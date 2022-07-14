@@ -1117,14 +1117,14 @@ var sliders = function sliders(slides, dir, prev, next) {
     if (dir === 'vertical') {
       paused = setInterval(function () {
         changeSlides(1);
-        items[slideIndex - 1].classList.add('slideInDown');
-      }, 3000);
+        items[slideIndex - 1].classList.add('rollOut');
+      }, 5000);
     } else {
       paused = setInterval(function () {
         changeSlides(1);
         items[slideIndex - 1].classList.remove('slideInRight');
         items[slideIndex - 1].classList.add('slideInLeft');
-      }, 3000);
+      }, 5000);
     }
   }
 
