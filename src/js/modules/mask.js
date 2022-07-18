@@ -1,5 +1,5 @@
-const mask = (selector) => {
-
+const mask = (selector) => {//селектор отмечает импуты, которые нужны для валидации 
+    
     let setCursorPosition = (pos, elem) => {
         elem.focus();
 
@@ -47,7 +47,7 @@ const mask = (selector) => {
         item.addEventListener('focus', createMask);
         item.addEventListener('blur', createMask);
     });
-    
+
 };
 
 export default mask;
