@@ -4,7 +4,7 @@ const filter = () => {
           wrapper = document.querySelector('.portfolio-wrapper'),
           markAll = wrapper.querySelectorAll('.all'),
           no = document.querySelector('.portfolio-no');
-    
+
     const typeFilter = (markType) => {
         markAll.forEach(item => {
             item.style.display = "none";
@@ -26,14 +26,10 @@ const filter = () => {
     };
 
     menu.addEventListener('click', (e) => {
-        
-    });
-
-    menu.addEventListener('click', (e) => {
         let target = e.target,
             classSelector = e.target.classList[0],
             allElems = wrapper.querySelectorAll(`.${classSelector}`);
-        
+
         typeFilter(allElems);
 
         if (target && target.tagName == "LI") {
