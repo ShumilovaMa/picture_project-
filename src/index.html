@@ -210,27 +210,47 @@
 							<div>Файл не выбран</div>
 							<input type=file name=upload>
 						</div>
-						<select id=size>
-							<option >Выберите размер картины</option>
-							<option >40x50</option>
-							<option >50x70</option>
-							<option >70x70</option>
-							<option >70x100</option>
+						<!-- <select id=size>
+							<option value>Выберите размер картины</option>
+							<option value="500">40x50</option>
+							<option value="1000">50x70</option>
+							<option value="1500">70x70</option>
+							<option value="2000">70x100</option>
 						</select>
 						<select id=material>
-							<option >Выберите материал картины</option>
-							<option   title="Изящный, позволяет легко создавать текстуру, подходит для декоративных картин маслом.">Холст из волокна</option>
-							<option   title="Достаточно грубый и создает ощущение реальности, подходит для классических пейзажей, натюрмортов и портретов.">Льняной холст</option>
-							<option  title="Изящный, подходит для всех типов реалистичных портретов.">Холст из натурального хлопка</option>
+							<option value>Выберите материал картины</option>
+							<option value="1" title="Изящный, позволяет легко создавать текстуру, подходит для декоративных картин маслом.">Холст из волокна</option>
+							<option value="1.2" title="Достаточно грубый и создает ощущение реальности, подходит для классических пейзажей, натюрмортов и портретов.">Льняной холст</option>
+							<option value="1.5" title="Изящный, подходит для всех типов реалистичных портретов.">Холст из натурального хлопка</option>
 						</select>
 						<select id=options>
-							<option >Дополнительные услуги</option>
-							<option >Покрытие арт-гелем</option>
-							<option >Экспресс-изготовление</option>
-							<option >Доставка готовых работ </option>
+							<option value="0">Дополнительные услуги</option>
+							<option value="1000">Покрытие арт-гелем</option>
+							<option value="2000">Экспресс-изготовление</option>
+							<option value="500">Доставка готовых работ </option>
+						</select> -->
+						<select name="orderSize" id=size>
+							<option value >Выберите размер картины</option>
+							<option value='40x50'>40x50</option>
+							<option value='50x70'>50x70</option>
+							<option value='70x70'>70x70</option>
+							<option value='70x100'>70x100</option>
 						</select>
-						<input type="text" class="promocode" placeholder="Введите ваш промокод">
-						<div class=calc-price>Для расчета нужно выбрать размер картины и материал картины</div>
+						<select name="orderMaterial" id=material>
+							<option value>Выберите материал картины</option>
+							<option value='Холст из волокна' title="Изящный, позволяет легко создавать текстуру, подходит для декоративных картин маслом.">Холст из волокна</option>
+							<option value='Льняной холст' title="Достаточно грубый и создает ощущение реальности, подходит для классических пейзажей, натюрмортов и портретов.">Льняной холст</option>
+							<option value='Холст из натурального хлопка' title="Изящный, подходит для всех типов реалистичных портретов.">Холст из натурального хлопка</option>
+						</select>
+						<select name="orderOptions" id=options>
+							<option value>Дополнительные услуги</option>
+							<option value='Покрытие арт-гелем'>Покрытие арт-гелем</option>
+							<option value='Экспресс-изготовление'>Экспресс-изготовление</option>
+							<option value='Доставка готовых работ'>Доставка готовых работ</option>
+						</select>
+						<input name="orderPromocode" type="text" class="promocode" placeholder="Введите ваш промокод">
+						<!-- <div class=calc-price>Для расчета нужно выбрать размер картины и материал картины</div> -->
+						<input name="result" type="text" class="calc-price" value="0" style='border: 0px;'>
 						<button class="button button-order">Быстрый заказ</button>
 					</form>
 				</div>
