@@ -28,7 +28,7 @@
 
 import {getResource} from "../services/requests";
 
-const calc = (size, material, options, promocode, result) => { //берем данные из базы данных 
+const calc = (size, material, options, promocode, result) => { //берем данные из базы данных
     const sizeBlock = document.querySelector(size),
           materialBlock = document.querySelector(material),
           optionsBlock = document.querySelector(options),
@@ -43,12 +43,12 @@ const calc = (size, material, options, promocode, result) => { //берем да
             state = res;
         })
         .catch(e => console.log(e));
-    
+
     function changePrice(event, elem) {
         elem.addEventListener(event, (e) => {
             const target = e.target,
                   select = target.id;
-            
+
             function calcFunc(state) {
                 for (let key in state[select]) {
                     if (elem.value === key) {
@@ -63,7 +63,7 @@ const calc = (size, material, options, promocode, result) => { //берем да
                                 optionsValue = state[select][key];
                                 break;
                         }
-                    }
+                    }    
                     // console.log(state[select][key]);
                 }
                 sum = Math.round((+sizeValue) * (+materialValue) + (+optionsValue));
@@ -86,5 +86,5 @@ const calc = (size, material, options, promocode, result) => { //берем да
     changePrice('change', optionsBlock);
     changePrice('input', promocodeBlock);
 };
-    
+
 export default calc;

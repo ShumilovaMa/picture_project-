@@ -4295,6 +4295,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/checkTextInputs */ "./src/js/modules/checkTextInputs.js");
 /* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
+
 
 
 
@@ -4305,15 +4307,18 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
+  var calcData = {};
+  console.log(calcData);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_1__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
   Object(_modules_sliders__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-slider-item', 'vertical');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(calcData);
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="name"]');
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="message"]');
   Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '#styles .row');
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price');
+  Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ }),
@@ -4353,7 +4358,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var calc = function calc(size, material, options, promocode, result) {
-  //берем данные из базы данных 
+  //берем данные из базы данных
   var sizeBlock = document.querySelector(size),
       materialBlock = document.querySelector(material),
       optionsBlock = document.querySelector(options),
@@ -4391,9 +4396,8 @@ var calc = function calc(size, material, options, promocode, result) {
                 optionsValue = state[select][key];
                 break;
             }
-          }
+          } // console.log(state[select][key]);
 
-          console.log(state[select][key]);
         }
 
         sum = Math.round(+sizeValue * +materialValue + +optionsValue);
@@ -4404,9 +4408,8 @@ var calc = function calc(size, material, options, promocode, result) {
           resultBlock.value = Math.round(sum * 0.7);
         } else {
           resultBlock.value = sum;
-        }
+        } // console.log(resultBlock.value);
 
-        console.log(resultBlock.value);
       }
 
       calcFunc(state);
@@ -4457,6 +4460,70 @@ var checkTextInputs = function checkTextInputs(selector) {
 
 /***/ }),
 
+/***/ "./src/js/modules/filter.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/filter.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var filter = function filter() {
+  var menu = document.querySelector('.portfolio-menu'),
+      items = menu.querySelectorAll('li'),
+      wrapper = document.querySelector('.portfolio-wrapper'),
+      markAll = wrapper.querySelectorAll('.all'),
+      no = document.querySelector('.portfolio-no');
+
+  var typeFilter = function typeFilter(markType) {
+    markAll.forEach(function (item) {
+      item.style.display = "none";
+      item.classList.remove('animated', 'fadeIn');
+    });
+    no.style.display = "none";
+    no.classList.remove('animated', 'fadeIn');
+
+    if (markType) {
+      markType.forEach(function (mark) {
+        mark.style.display = "block";
+        mark.classList.add('animated', 'fadeIn');
+      });
+    } else {
+      no.style.display = "block";
+      no.classList.add('animated', 'fadeIn');
+    }
+  };
+
+  menu.addEventListener('click', function (e) {});
+  menu.addEventListener('click', function (e) {
+    var target = e.target,
+        classSelector = e.target.classList[0],
+        allElems = wrapper.querySelectorAll(".".concat(classSelector));
+    typeFilter(allElems);
+
+    if (target && target.tagName == "LI") {
+      items.forEach(function (item) {
+        item.classList.remove('active');
+      });
+      target.classList.add('active');
+    }
+
+    if (classSelector == 'granddad' || classSelector == 'grandmother') {
+      no.style.display = 'block';
+      no.classList.add('animated', 'fadeIn');
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (filter);
+
+/***/ }),
+
 /***/ "./src/js/modules/forms.js":
 /*!*********************************!*\
   !*** ./src/js/modules/forms.js ***!
@@ -4488,7 +4555,7 @@ __webpack_require__.r(__webpack_exports__);
 // import checkNumInputs from './checkNumInputs';
 
 
-var forms = function forms() {
+var forms = function forms(state) {
   var form = document.querySelectorAll('form'),
       inputs = document.querySelectorAll('input'),
       upload = document.querySelectorAll('[name="upload"]'); // checkNumInputs('input[name="user_phone"]');
@@ -4543,6 +4610,13 @@ var forms = function forms() {
       textMessage.textContent = message.loading;
       statusMessage.appendChild(textMessage);
       var formData = new FormData(item);
+
+      if (item.getAttribute('data-calc') === 'calc') {
+        for (var key in state) {
+          formData.append(key, state[key]);
+        }
+      }
+
       var api; //формирует динамически путь для отправки 
 
       item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
