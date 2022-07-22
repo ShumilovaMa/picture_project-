@@ -1,7 +1,7 @@
 const burger = (menuSelector, burgerSelector) => {
     const menuElem = document.querySelector(menuSelector),
           burgerElem = document.querySelector(burgerSelector);
-
+    
     menuElem.style.display = 'none';
 
     burgerElem.addEventListener('click', () => {
